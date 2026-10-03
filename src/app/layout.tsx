@@ -26,8 +26,17 @@ const signature = Mrs_Saint_Delafield({
 
 const title = `${profile.name} | ${profile.role}`;
 
+/**
+ * The site's public address, used to build absolute links for share previews.
+ * Order: `siteUrl` in portfolio.ts → SITE_URL env var → Render's own URL.
+ * (On Vercel nothing is needed; Next.js detects the address automatically.)
+ */
+const siteUrl = !isTodo(profile.siteUrl)
+  ? profile.siteUrl
+  : process.env.SITE_URL || process.env.RENDER_EXTERNAL_URL;
+
 export const metadata: Metadata = {
-  ...(isTodo(profile.siteUrl) ? {} : { metadataBase: new URL(profile.siteUrl) }),
+  ...(siteUrl ? { metadataBase: new URL(siteUrl) } : {}),
   title,
   description: seo.description,
   keywords: seo.keywords,
@@ -39,8 +48,10 @@ export const metadata: Metadata = {
     description: seo.description,
     siteName: profile.name,
     locale: "en_IN",
+    // Generated at build time by app/og.png/route.tsx
+    images: [{ url: "/og.png", width: 1200, height: 630, type: "image/png", alt: title }],
   },
-  twitter: { card: "summary_large_image", title, description: seo.description },
+  twitter: { card: "summary_large_image", title, description: seo.description, images: ["/og.png"] },
 };
 
 export const viewport: Viewport = {

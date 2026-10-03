@@ -31,8 +31,9 @@ export const profile = {
   location: "Mysuru, India",
   photo: "/me/photo.jpg",
   /**
-   * Your site's address once it's live (e.g. "https://kgoutam.vercel.app").
-   * Optional on Vercel (it's detected automatically); set it if you use a custom domain.
+   * Your site's address once it's live (e.g. "https://kgoutam.dev"), used for link previews.
+   * Not needed on Render's or Vercel's own address (detected automatically during the build);
+   * set it if you add a custom domain.
    */
   siteUrl: "TODO: add site URL after deploying",
 };

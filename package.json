@@ -2,10 +2,13 @@
   "name": "kgoutam-portfolio",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "npx --yes serve@14 out -l 3000",
     "lint": "eslint"
   },
   "dependencies": {

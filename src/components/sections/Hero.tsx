@@ -29,11 +29,12 @@ export default function Hero() {
       aria-labelledby="top-title"
       className="glow relative isolate flex min-h-svh flex-col overflow-hidden px-4 pb-10 pt-20 sm:px-6 md:px-10 lg:pb-14"
     >
-      {/* Giant faint name watermark */}
+      {/* Giant faint name watermark. Sized so the whole word fits (it is ~4.3× its font size wide),
+          centred with flex so any overflow would be split evenly between both edges. */}
       <m.p
         aria-hidden
         style={{ y: still(watermarkY) }}
-        className="pointer-events-none absolute inset-x-0 top-[16%] -z-10 select-none whitespace-nowrap text-center text-[27vw] font-black leading-none tracking-tighter text-ink/[0.05] lg:top-[10%]"
+        className="pointer-events-none absolute inset-x-0 top-[18%] -z-10 flex select-none justify-center whitespace-nowrap text-[21.5vw] font-black leading-none tracking-tighter text-ink/[0.05] lg:top-[14%]"
       >
         {hero.watermark}
       </m.p>

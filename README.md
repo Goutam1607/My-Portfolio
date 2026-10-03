@@ -1,7 +1,8 @@
 # K Goutam: Portfolio
 
 My personal portfolio website, built with **Next.js 16**, **Tailwind CSS** and **Framer Motion**.
-It's a static site (no server, no database), so it can be hosted for free on **Vercel**.
+It builds into a plain **static site** (HTML/CSS/JS files in `out/`, no server, no database),
+so it can be hosted for free on **Render** (set up in this repo), Vercel, Netlify or GitHub Pages.
 
 ---
 
@@ -24,8 +25,8 @@ Other useful commands:
 
 | Command          | What it does                                                         |
 | ---------------- | -------------------------------------------------------------------- |
-| `npm run build`  | Builds the final, optimised site and checks for errors. Run before deploying. |
-| `npm run start`  | Runs the built site locally (after `npm run build`), exactly as visitors get it. |
+| `npm run build`  | Builds the final site into the `out/` folder and checks for errors. Run before deploying. |
+| `npm run start`  | Serves the built `out/` folder at http://localhost:3000, exactly as visitors get it (run `npm run build` first). |
 | `npm run lint`   | Checks the code for common mistakes.                                 |
 
 ---
@@ -67,7 +68,7 @@ linkedin: "https://www.linkedin.com/in/your-profile",
 Current TODOs (search the file for `TODO` to find them all):
 
 - `profile.linkedin`: your LinkedIn URL
-- `profile.siteUrl`: your site's address after deploying (optional, see section 4)
+- `profile.siteUrl`: your site's address (only needed for a custom domain, see section 4)
 - `projects` → GitHub links for **Review Intelligence** and **Skin Cancer Detector**
 - `projects` → live URL for **Symbiot 2026**
 - `timeline` → confirm the year of Class XII (currently 2023)
@@ -84,7 +85,8 @@ Current TODOs (search the file for `TODO` to find them all):
 
 ## 3. Replace images, video and résumé
 
-Files in the `public/` folder are served as-is. Replace a file by dropping in a new one **with the same name**:
+Files in the `public/` folder are served as-is (they are **not** resized automatically, so keep
+photos under ~200 KB). Replace a file by dropping in a new one **with the same name**:
 
 | File                        | Used for                                                       |
 | --------------------------- | -------------------------------------------------------------- |
@@ -94,31 +96,43 @@ Files in the `public/` folder are served as-is. Replace a file by dropping in a 
 | `public/Resume.pdf`         | Résumé download (visitors get it as `K_Goutam_Resume.pdf`)     |
 
 The link-preview image (what shows when you share your link on LinkedIn/WhatsApp) is generated
-automatically from your name, role and avatar by [`src/app/opengraph-image.tsx`](src/app/opengraph-image.tsx).
+automatically at build time from your name, role and avatar by [`src/app/og.png/route.tsx`](src/app/og.png/route.tsx)
+and published as `/og.png`.
 
 ---
 
-## 4. Put it online with Vercel (free)
+## 4. Put it online with Render (free)
 
-### Step 1: Put the code on GitHub
+The code lives at **https://github.com/Goutam1607/My-Portfolio**, and the repo contains a
+[`render.yaml`](render.yaml) "Blueprint" that tells Render exactly how to build and host the site
+as a free **Static Site** (fast, served from a global CDN, never "sleeps").
 
-✅ Already done: the code lives at **https://github.com/Goutam1607/My-Portfolio**.
+### Deploy (first time)
 
-(For reference, a brand-new project is connected with
-`git remote add origin <repo URL>` and uploaded with `git push -u origin main`.)
-If Git ever asks who you are, run `git config --global user.name "K Goutam"` and
-`git config --global user.email "kgoutam12504@gmail.com"` once.
+1. Go to [dashboard.render.com](https://dashboard.render.com) and sign up / log in **with GitHub**.
+2. Click **New + → Blueprint**.
+3. Connect your GitHub account if asked, then pick the **My-Portfolio** repository.
+4. Render reads `render.yaml` and shows one service, **my-portfolio** (Static Site). Click **Apply** / **Deploy Blueprint**.
+5. Wait for the build to finish (2–3 minutes). Your site is live at the address shown at the top of the
+   service page, e.g. `https://my-portfolio.onrender.com` (Render adds a few random characters if that name is taken).
 
-### Step 2: Deploy on Vercel
+<details>
+<summary>Prefer to set it up by hand instead of the Blueprint?</summary>
 
-1. Go to [vercel.com](https://vercel.com) and **Sign up with GitHub**.
-2. Click **Add New… → Project**, find your `My-Portfolio` repository and click **Import**.
-3. Leave all settings as they are (Vercel detects Next.js automatically) and click **Deploy**.
-4. After about a minute you get a live link like `https://portfolio-xxxx.vercel.app`. 🎉
+**New + → Static Site** → pick **My-Portfolio**, then fill in:
 
-### Step 3: Updating the live site
+| Setting            | Value                          |
+| ------------------ | ------------------------------ |
+| Branch             | `main`                         |
+| Build Command      | `npm ci && npm run build`      |
+| Publish Directory  | `out`                          |
 
-Every time you push to GitHub, Vercel rebuilds and updates the site automatically:
+Click **Create Static Site**. (The Node.js version comes from the `.node-version` file: 22.)
+</details>
+
+### Updating the live site
+
+Every push to the `main` branch on GitHub makes Render rebuild and update the site automatically:
 
 ```bash
 git add -A
@@ -126,12 +140,19 @@ git commit -m "Update content"
 git push
 ```
 
-### Optional: custom domain
+### Link previews and custom domains
 
-In your Vercel project go to **Settings → Domains** to add a domain you own.
-Then set `profile.siteUrl` in `src/data/portfolio.ts` to that address (e.g. `"https://kgoutam.dev"`),
-so link previews always use your own domain. (On a plain `*.vercel.app` address this isn't needed;
-Vercel's address is detected automatically.)
+Link previews (the `og.png` card on LinkedIn/WhatsApp) need the site's full address. On Render this is
+picked up automatically from Render's `RENDER_EXTERNAL_URL` during the build.
+
+If you add a **custom domain** (service page → **Settings → Custom Domains**), set
+`profile.siteUrl` in `src/data/portfolio.ts` to it (e.g. `"https://kgoutam.dev"`) and push, so previews
+use your own domain. You can check a preview with [opengraph.xyz](https://www.opengraph.xyz).
+
+### Other hosts
+
+The same `out/` folder works anywhere static files can be hosted. On **Vercel**: *Add New → Project →*
+import the repo → **Deploy** (no settings needed).
 
 ---
 
@@ -144,7 +165,7 @@ src/
     layout.tsx             ← fonts, page title, SEO tags
     page.tsx               ← puts the sections in order
     globals.css            ← colours (CSS variables at the top) and global styles
-    opengraph-image.tsx    ← link-preview image
+    og.png/route.tsx       ← link-preview image (built into /og.png)
     favicon.ico, icon.svg, apple-icon.png  ← "KG" browser icons
   components/
     layout/                ← Header (logo + navbar + mobile menu), Footer
@@ -156,6 +177,8 @@ src/
     ui/                    ← small shared pieces (section headings, buttons, scroll reveal, count-up)
   assets/                  ← fonts + avatar crop used only for the link-preview image
 public/                    ← video, images, résumé
+render.yaml                ← Render hosting setup (Static Site)
+next.config.ts             ← `output: "export"` = build a static site into out/
 ```
 
 **Changing colours:** all colours are defined once at the top of

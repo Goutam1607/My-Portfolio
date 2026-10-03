@@ -3,14 +3,19 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { hero, profile } from "@/data/portfolio";
 
-// The preview image shown when the site is shared on LinkedIn, WhatsApp, X, etc.
-export const alt = `${profile.name} | ${profile.role}`;
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+/*
+ * The preview image shown when the site is shared on LinkedIn, WhatsApp, X, etc.
+ * Built once at build time into a real `og.png` file (a file with a .png extension,
+ * so static hosts like Render serve it with the right image type).
+ * Referenced from the metadata in app/layout.tsx.
+ */
+export const dynamic = "force-static";
+
+const size = { width: 1200, height: 630 };
 
 const asset = (p: string) => readFile(join(process.cwd(), "src/assets", p));
 
-export default async function Image() {
+export async function GET() {
   const [interBold, interMedium, serifItalic, avatar] = await Promise.all([
     asset("fonts/Inter-Bold.ttf"),
     asset("fonts/Inter-Medium.ttf"),
@@ -22,21 +27,22 @@ export default async function Image() {
   return new ImageResponse(
     (
       <div style={{ width: "100%", height: "100%", display: "flex", background: "#ffffff", position: "relative" }}>
-        {/* faint watermark (clipped before the avatar so it doesn't show its edges) */}
-        <div style={{ position: "absolute", top: 40, left: 0, width: 790, height: 380, overflow: "hidden", display: "flex" }}>
-          <div
-            style={{
-              marginLeft: -20,
-              fontSize: 300,
-              fontFamily: "Inter",
-              fontWeight: 700,
-              letterSpacing: -12,
-              color: "rgba(30,34,53,0.05)",
-              whiteSpace: "nowrap",
-            }}
-          >
-            {hero.watermark}
-          </div>
+        {/* faint watermark, sized so the whole name fits left of the avatar */}
+        <div
+          style={{
+            position: "absolute",
+            top: 80,
+            left: 64,
+            fontSize: 150,
+            fontFamily: "Inter",
+            fontWeight: 700,
+            letterSpacing: -5,
+            lineHeight: 1,
+            color: "rgba(30,34,53,0.05)",
+            whiteSpace: "nowrap",
+          }}
+        >
+          {hero.watermark}
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 0 72px 80px", width: 780 }}>
