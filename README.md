@@ -102,26 +102,17 @@ automatically from your name, role and avatar by [`src/app/opengraph-image.tsx`]
 
 ### Step 1: Put the code on GitHub
 
-1. Go to [github.com/new](https://github.com/new) and create a new **empty** repository,
-   e.g. `portfolio` (don't add a README, .gitignore or license, since the project already has them).
-2. In a terminal **inside this `portfolio` folder**, run these one at a time:
+✅ Already done: the code lives at **https://github.com/Goutam1607/My-Portfolio**.
 
-   ```bash
-   git add -A
-   git commit -m "My portfolio"
-   git branch -M main
-   git remote add origin https://github.com/Goutam1607/portfolio.git
-   git push -u origin main
-   ```
-
-   (Use your real repository URL in the `git remote add` line. GitHub shows it on the empty repo page.)
-   If Git asks who you are, run `git config --global user.name "K Goutam"` and
-   `git config --global user.email "kgoutam12504@gmail.com"` once, then commit again.
+(For reference, a brand-new project is connected with
+`git remote add origin <repo URL>` and uploaded with `git push -u origin main`.)
+If Git ever asks who you are, run `git config --global user.name "K Goutam"` and
+`git config --global user.email "kgoutam12504@gmail.com"` once.
 
 ### Step 2: Deploy on Vercel
 
 1. Go to [vercel.com](https://vercel.com) and **Sign up with GitHub**.
-2. Click **Add New… → Project**, find your `portfolio` repository and click **Import**.
+2. Click **Add New… → Project**, find your `My-Portfolio` repository and click **Import**.
 3. Leave all settings as they are (Vercel detects Next.js automatically) and click **Deploy**.
 4. After about a minute you get a live link like `https://portfolio-xxxx.vercel.app`. 🎉
 
