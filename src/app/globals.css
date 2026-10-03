@@ -1,26 +1,146 @@
 @import "tailwindcss";
 
+/* ───────────── Design tokens: change colours here ───────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* surfaces */
+  --canvas: #ffffff; /* page background */
+  --surface: #f5f6f8; /* subtle bands / hover */
+  --card: #fafbfc; /* cards */
+  --tint: #3d4a6b; /* faint cool wash behind some sections */
+
+  /* text */
+  --ink: #1e2235; /* headings, dark buttons (deep navy) */
+  --ink-soft: #5b6178; /* italic serif accent words */
+  --muted: #5f6577; /* secondary text (AA on white) */
+  --line: rgb(30 34 53 / 0.1); /* thin borders */
+
+  /* skill categories (periodic table) */
+  --cat-lang: #1e2235; /* navy */
+  --cat-ml: #3d4a6b; /* slate blue */
+  --cat-iot: #cdd6e6; /* steel blue tint */
+  --cat-tools: #e9ebf0; /* light grey */
+
+  /* timeline badges */
+  --badge-education: #e4eaf6;
+  --badge-leadership: #fbefd7;
+  --badge-club: #e3f1e8;
+  --badge-event: #f5e3e3;
+
+  --shadow-soft: 0 1px 2px rgb(30 34 53 / 0.05), 0 10px 30px -14px rgb(30 34 53 / 0.18);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-tint: var(--tint);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-cat-lang: var(--cat-lang);
+  --color-cat-ml: var(--cat-ml);
+  --color-cat-iot: var(--cat-iot);
+  --color-cat-tools: var(--cat-tools);
+  --color-badge-education: var(--badge-education);
+  --color-badge-leadership: var(--badge-leadership);
+  --color-badge-club: var(--badge-club);
+  --color-badge-event: var(--badge-event);
+
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-instrument-serif);
+  --font-signature: var(--font-mrs-saint-delafield);
+
+  --shadow-soft: var(--shadow-soft);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ───────────────────────── Base ───────────────────────── */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--canvas);
+  color: var(--ink);
+  /* "clip" (not "hidden") stops sideways scrolling without breaking sticky elements */
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--canvas);
+}
+
+/* Visible focus ring for keyboard users */
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* Very faint cool-grey wash; add `glow` to any relatively-positioned section */
+.glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(40rem 28rem at 85% 10%, rgb(61 74 107 / 0.06), transparent 70%),
+    radial-gradient(30rem 22rem at 5% 90%, rgb(61 74 107 / 0.04), transparent 70%);
+  /* fade out at the section's top and bottom so neighbouring sections don't show a seam */
+  mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+}
+
+/* Sections below the hero: skip layout/paint until they're near the screen.
+   "auto 900px" = placeholder height until the real height is known (then remembered). */
+.lazy-render {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
+/* Scan line in the Skin Cancer Detector mockup */
+@keyframes scan {
+  0%,
+  100% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(560%);
+  }
+}
+
+/* Hero entrance animations in plain CSS so they start before JavaScript loads (faster first paint) */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.animate-rise {
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out both;
+}
+
+/* Users who prefer reduced motion: no smooth scrolling, no slide-in */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-rise {
+    animation-name: fade-in;
+  }
 }
