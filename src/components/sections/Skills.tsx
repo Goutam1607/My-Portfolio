@@ -58,11 +58,11 @@ export default function Skills() {
       </Reveal>
 
       {/* Compact preview for phones/tablets (fixed height → no layout jump on tap) */}
-      <div className="mt-6 h-[92px] lg:hidden" aria-live="polite">
+      <div className="mt-6 h-[5.75rem] lg:hidden" aria-live="polite">
         <MobilePreview skill={active} />
       </div>
 
-      <div className="mt-6 grid gap-10 lg:mt-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
+      <div className="mt-6 grid gap-10 lg:mt-10 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start">
         <Reveal delay={0.1}>
           <ul className="grid grid-cols-4 gap-2 min-[420px]:grid-cols-5 sm:grid-cols-6 sm:gap-2.5 xl:grid-cols-8">
             {skills.map((skill) => {
@@ -84,11 +84,11 @@ export default function Skills() {
                       categoryStyle[skill.category].tile
                     } ${isActive ? "ring-2 ring-ink ring-offset-2 ring-offset-canvas" : ""}`}
                   >
-                    <span className="text-[9px] font-medium tabular-nums opacity-70 sm:text-[10px]">{skill.number}</span>
+                    <span className="text-[0.5625rem] font-medium tabular-nums opacity-70 sm:text-[0.625rem]">{skill.number}</span>
                     <span className="text-center text-xl font-bold leading-none tracking-tight sm:text-2xl lg:text-3xl">
                       {skill.symbol}
                     </span>
-                    <span className="truncate text-center text-[8px] font-medium opacity-80 sm:text-[10px]">{skill.name}</span>
+                    <span className="truncate text-center text-[0.5rem] font-medium opacity-80 sm:text-[0.625rem]">{skill.name}</span>
                   </button>
                 </m.li>
               );
@@ -107,7 +107,7 @@ export default function Skills() {
 
 function DesktopPreview({ skill }: { skill: Skill | null }) {
   return (
-    <div className="relative h-[380px] overflow-hidden rounded-2xl border border-line bg-card shadow-soft">
+    <div className="relative h-[23.75rem] overflow-hidden rounded-2xl border border-line bg-card shadow-soft">
       <AnimatePresence mode="wait" initial={false}>
         {skill ? (
           <m.div
@@ -131,7 +131,7 @@ function DesktopPreview({ skill }: { skill: Skill | null }) {
             <p className="text-2xl font-bold tracking-tight text-ink">{skill.name}</p>
             <p className="mt-1.5 text-sm leading-relaxed text-muted">{skill.note}</p>
             {/* faint element symbol in the corner */}
-            <span aria-hidden className="pointer-events-none absolute -bottom-6 -right-2 text-[120px] font-black leading-none text-ink/[0.04]">
+            <span aria-hidden className="pointer-events-none absolute -bottom-6 -right-2 text-[7.5rem] font-black leading-none text-ink/[0.04]">
               {skill.symbol}
             </span>
           </m.div>

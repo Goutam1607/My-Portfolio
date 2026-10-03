@@ -86,7 +86,7 @@ export function SoundToggle({ className = "" }: { className?: string }) {
       title={muted ? "Sound on" : "Sound off"}
       className={`relative grid size-11 place-items-center rounded-full border border-line bg-canvas/95 text-ink shadow-soft md:bg-canvas/70 md:backdrop-blur-md transition-colors hover:bg-ink hover:text-canvas ${className}`}
     >
-      {muted ? <VolumeX className="size-[18px]" aria-hidden /> : <Volume2 className="size-[18px]" aria-hidden />}
+      {muted ? <VolumeX className="size-[1.125rem]" aria-hidden /> : <Volume2 className="size-[1.125rem]" aria-hidden />}
       {/* Live indicator while sound is playing */}
       {!muted && (
         <span aria-hidden className="absolute right-1.5 top-1.5 size-2 rounded-full bg-emerald-500 ring-2 ring-canvas" />

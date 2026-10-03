@@ -73,7 +73,7 @@ export default function LanyardCard() {
 
         {/* Card (3D flip) */}
         <div
-          className="relative -mt-1 h-[420px] w-[264px] cursor-grab touch-pan-y select-none active:cursor-grabbing"
+          className="relative -mt-1 h-[26.25rem] w-[16.5rem] cursor-grab touch-pan-y select-none active:cursor-grabbing"
           style={{ perspective: 1400 }}
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
@@ -117,8 +117,8 @@ function Strap() {
     <div aria-hidden className="flex flex-col items-center">
       <div className="size-4 rounded-full border-[3px] border-zinc-400 bg-transparent" />
       <div className="relative -mt-1 h-16 w-6 overflow-hidden rounded-b-sm bg-ink md:h-40">
-        <div className="absolute inset-y-0 left-[3px] right-[3px] border-x border-dashed border-canvas/25" />
-        <p className="absolute left-1/2 top-2 -translate-x-1/2 whitespace-nowrap text-[7px] font-semibold uppercase tracking-[0.3em] text-canvas/55 [writing-mode:vertical-rl]">
+        <div className="absolute inset-y-0 left-[0.1875rem] right-[0.1875rem] border-x border-dashed border-canvas/25" />
+        <p className="absolute left-1/2 top-2 -translate-x-1/2 whitespace-nowrap text-[0.4375rem] font-semibold uppercase tracking-[0.3em] text-canvas/55 [writing-mode:vertical-rl]">
           {profile.name} · Developer · {profile.name} · Developer
         </p>
       </div>
@@ -145,24 +145,24 @@ function CardFront() {
       {/* dark header strip */}
       <div className="relative bg-ink px-5 pb-3 pt-7 text-canvas">
         <Slot className="bg-canvas" />
-        <p className="flex items-center justify-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.3em]">
+        <p className="flex items-center justify-center gap-1.5 text-[0.6875rem] font-semibold uppercase tracking-[0.3em]">
           {idCard.header}
           <BadgeCheck className="size-4 text-sky-300" aria-label="verified" />
         </p>
       </div>
 
       <div className="flex flex-1 flex-col items-center px-5 pt-5">
-        <div className="relative h-[136px] w-[110px] overflow-hidden rounded-xl ring-4 ring-surface">
+        <div className="relative h-[8.5rem] w-[6.875rem] overflow-hidden rounded-xl ring-4 ring-surface">
           <Image src={profile.photo} alt={`Photo of ${profile.name}`} fill sizes="110px" className="object-cover" draggable={false} />
         </div>
 
         <p className="mt-4 text-xl font-bold tracking-[0.12em] text-ink">{idCard.name}</p>
-        <p className="mt-0.5 text-[11px] font-medium uppercase tracking-[0.25em] text-muted">{idCard.role}</p>
+        <p className="mt-0.5 text-[0.6875rem] font-medium uppercase tracking-[0.25em] text-muted">{idCard.role}</p>
 
         <dl className="mt-4 grid w-full grid-cols-2 gap-2 border-t border-line pt-3">
           {idCard.fields.map((f) => (
             <div key={f.label}>
-              <dt className="text-[9px] font-medium uppercase tracking-[0.2em] text-muted">{f.label}</dt>
+              <dt className="text-[0.5625rem] font-medium uppercase tracking-[0.2em] text-muted">{f.label}</dt>
               <dd className="font-mono text-xs font-semibold text-ink">{f.value}</dd>
             </div>
           ))}
@@ -185,16 +185,16 @@ function CardBack() {
             <span className="mt-0.5 grid size-4 shrink-0 place-items-center rounded-full bg-canvas/15">
               <Check className="size-2.5" aria-hidden />
             </span>
-            <span className="text-[13px] leading-snug">
+            <span className="text-[0.8125rem] leading-snug">
               <span className="font-semibold">{item.title}</span>
-              <span className="block text-[11px] text-canvas/60">{item.detail}</span>
+              <span className="block text-[0.6875rem] text-canvas/60">{item.detail}</span>
             </span>
           </li>
         ))}
       </ul>
       <div className="mt-auto">
         <p className="font-signature text-[2.6rem] leading-none text-canvas/90">{idCard.signature}</p>
-        <p className="mt-1 border-t border-canvas/20 pt-1 text-[9px] uppercase tracking-[0.25em] text-canvas/45">Signature</p>
+        <p className="mt-1 border-t border-canvas/20 pt-1 text-[0.5625rem] uppercase tracking-[0.25em] text-canvas/45">Signature</p>
       </div>
     </div>
   );
@@ -218,7 +218,7 @@ function Barcode({ value }: { value: string }) {
           <rect key={i} x={b.x} y={0} width={b.w} height={34} fill="currentColor" />
         ))}
       </svg>
-      <p className="mt-1 text-center font-mono text-[9px] tracking-[0.4em] text-muted">{value}</p>
+      <p className="mt-1 text-center font-mono text-[0.5625rem] tracking-[0.4em] text-muted">{value}</p>
     </div>
   );
 }

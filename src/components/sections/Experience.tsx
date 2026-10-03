@@ -34,17 +34,17 @@ export default function Experience() {
 
       <div ref={ref} className="relative mt-16">
         {/* track + drawn line */}
-        <div aria-hidden className="absolute inset-y-0 left-[7px] w-px bg-line lg:left-1/2" />
+        <div aria-hidden className="absolute inset-y-0 left-[0.4375rem] w-px bg-line lg:left-1/2" />
         <m.div
           aria-hidden
           style={{ scaleY: reduceMotion ? 1 : progress }}
-          className="absolute inset-y-0 left-[7px] w-px origin-top bg-ink lg:left-1/2"
+          className="absolute inset-y-0 left-[0.4375rem] w-px origin-top bg-ink lg:left-1/2"
         />
 
         {years.map((year) => (
           <div key={year} className="relative grid pb-12 last:pb-0 lg:grid-cols-2 lg:pb-20">
             {/* Year: sticky header on phones, sticky big number on the left half on laptops */}
-            <div className="sticky top-[72px] z-10 ml-5 rounded-lg bg-canvas/95 py-2 pl-3 lg:static lg:ml-0 lg:rounded-none lg:bg-transparent lg:p-0 lg:pr-14">
+            <div className="sticky top-[4.5rem] z-10 ml-5 rounded-lg bg-canvas/95 py-2 pl-3 lg:static lg:ml-0 lg:rounded-none lg:bg-transparent lg:p-0 lg:pr-14">
               <p className="text-4xl font-bold tracking-tight text-ink lg:sticky lg:top-28 lg:text-right lg:text-8xl">{year}</p>
             </div>
 
@@ -89,10 +89,10 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
       {/* dot on the line */}
       <span
         aria-hidden
-        className="absolute -left-[31px] top-7 size-3 rounded-full border-2 border-ink bg-canvas lg:-left-[62px]"
+        className="absolute -left-[1.9375rem] top-7 size-3 rounded-full border-2 border-ink bg-canvas lg:-left-[3.875rem]"
       />
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <span className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] ${badgeStyle[entry.type]}`}>
+        <span className={`rounded-full px-2.5 py-1 text-[0.625rem] font-semibold uppercase tracking-[0.18em] ${badgeStyle[entry.type]}`}>
           {entry.type}
         </span>
         {entry.period && <span className="text-xs text-muted">{entry.period}</span>}
@@ -112,7 +112,7 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
       {entry.tags.length > 0 && (
         <ul className="mt-4 flex flex-wrap gap-1.5" aria-label="Tags">
           {entry.tags.map((t) => (
-            <li key={t} className="rounded-md bg-surface px-2 py-0.5 text-[11px] font-medium text-muted">
+            <li key={t} className="rounded-md bg-surface px-2 py-0.5 text-[0.6875rem] font-medium text-muted">
               {t}
             </li>
           ))}

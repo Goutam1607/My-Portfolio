@@ -17,8 +17,8 @@ export default function About() {
     <Section id="about" className="glow">
       <div
         className="grid gap-x-12 gap-y-14 [grid-template-areas:'text'_'card'_'facts']
-          md:grid-cols-[minmax(0,1fr)_300px] md:[grid-template-areas:'text_card'_'facts_card']
-          xl:grid-cols-[minmax(0,1.1fr)_300px_minmax(0,0.9fr)] xl:[grid-template-areas:'text_card_facts']"
+          md:grid-cols-[minmax(0,1fr)_18.75rem] md:[grid-template-areas:'text_card'_'facts_card']
+          xl:grid-cols-[minmax(0,1.1fr)_18.75rem_minmax(0,0.9fr)] xl:[grid-template-areas:'text_card_facts']"
       >
         {/* Left: heading, bio, buttons */}
         <Reveal className="[grid-area:text] xl:pt-10">
@@ -53,7 +53,7 @@ export default function About() {
           <h3 className="text-xs font-medium uppercase tracking-[0.25em] text-muted">Quick facts</h3>
           <dl className="mt-5 divide-y divide-line border-y border-line">
             {quickFacts.map((fact) => (
-              <div key={fact.label} className="grid grid-cols-[96px_minmax(0,1fr)] gap-4 py-3.5 text-sm">
+              <div key={fact.label} className="grid grid-cols-[6rem_minmax(0,1fr)] gap-4 py-3.5 text-sm">
                 <dt className="text-muted">{fact.label}</dt>
                 <dd className="font-medium text-ink">{fact.value}</dd>
               </div>

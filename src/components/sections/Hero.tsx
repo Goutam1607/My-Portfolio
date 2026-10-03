@@ -44,7 +44,7 @@ export default function Hero() {
             --h sets its height; width and position follow from it. */}
         <div
           style={{ mixBlendMode: "multiply" }}
-          className="animate-fade-in relative mx-auto mt-6 h-(--h) w-[calc(var(--h)*0.64)] [--h:min(44svh,520px)] sm:mt-10 sm:[--h:min(50svh,560px)] lg:absolute lg:bottom-0 lg:left-[calc(72%_-_var(--h)*0.32)] lg:mx-0 lg:mt-0 lg:[--h:min(84svh,820px)]"
+          className="animate-fade-in relative mx-auto mt-6 h-(--h) w-[calc(var(--h)*0.64)] [--h:min(44svh,32.5rem)] sm:mt-10 sm:[--h:min(50svh,35rem)] lg:absolute lg:bottom-0 lg:left-[calc(72%_-_var(--h)*0.32)] lg:mx-0 lg:mt-0 lg:[--h:min(84svh,51.25rem)]"
         >
           <m.div
             style={{ opacity: still(avatarOpacity), y: still(avatarY) }}
